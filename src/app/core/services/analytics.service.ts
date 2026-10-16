@@ -22,6 +22,13 @@ export interface CountryAnalytics {
   salaryStatistics: SalaryStatistic[];
 }
 
+export interface DepartmentAnalytics {
+  group: string;
+  employeeCount: number;
+  activeEmployees: number;
+  salaryStatistics: SalaryStatistic[];
+}
+
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
   private readonly apiBaseUrl = 'http://localhost:8080/api/analytics';
@@ -34,5 +41,9 @@ export class AnalyticsService {
 
   getByCountry(): Observable<CountryAnalytics[]> {
     return this.http.get<CountryAnalytics[]>(`${this.apiBaseUrl}/by-country`);
+  }
+
+  getByDepartment(): Observable<DepartmentAnalytics[]> {
+    return this.http.get<DepartmentAnalytics[]>(`${this.apiBaseUrl}/by-department`);
   }
 }

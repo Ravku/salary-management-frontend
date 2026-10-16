@@ -44,4 +44,14 @@ describe('AnalyticsService', () => {
     expect(request.request.headers.get('Authorization')).toBe('Bearer test-token');
     request.flush([]);
   });
+
+  it('gets department analytics with only the bearer authorization header', () => {
+    service.getByDepartment().subscribe();
+
+    const request = httpTestingController.expectOne('http://localhost:8080/api/analytics/by-department');
+    expect(request.request.method).toBe('GET');
+    expect(request.request.body).toBeNull();
+    expect(request.request.headers.get('Authorization')).toBe('Bearer test-token');
+    request.flush([]);
+  });
 });

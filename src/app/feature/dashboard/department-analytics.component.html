@@ -1,14 +1,147 @@
-<section class="department-placeholder">
+<section class="department-analytics">
   <header class="page-header">
     <div>
       <h1>Department analytics</h1>
-      <p>Headcount and salary statistics by employee department</p>
+      <p>Department headcount and salary averages, segmented by currency</p>
+    </div>
+    <div class="updated-label">
+      @if (updatedAt) {
+        Updated {{ updatedAt | date:'shortTime' }}
+      } @else {
+        Waiting for analytics
+      }
     </div>
   </header>
 
-  <mat-card class="department-message">
-    <h2>Department analytics are not available yet</h2>
-    <p>The analytics API currently provides summary and country data only.</p>
-    <a mat-flat-button color="primary" routerLink="/dashboard/country">View country analytics</a>
-  </mat-card>
+  @if (isLoading) {
+    <mat-card class="loading-state" role="status">
+      <mat-progress-bar mode="indeterminate" aria-label="Loading department analytics"></mat-progress-bar>
+      <p>Loading department analytics…</p>
+    </mat-card>
+  } @else if (errorMessage) {
+    <mat-card class="error-state" role="alert">
+      <span>{{ errorMessage }}</span>
+      <button mat-flat-button color="primary" type="button" (click)="loadAnalytics()">Retry</button>
+    </mat-card>
+  } @else if (summary) {
+    <section class="summary-grid" aria-label="Department analytics summary">
+      <mat-card class="summary-card">
+        <div class="summary-title">
+          <h2>Total employees</h2>
+          <mat-chip-set aria-label="Department count">
+            <mat-chip>{{ departments.length }} departments</mat-chip>
+          </mat-chip-set>
+        </div>
+        <strong>{{ summary.totalEmployees | number }}</strong>
+        <p><i class="status-dot blue"></i>from analytics API</p>
+      </mat-card>
+      <mat-card class="summary-card">
+        <div class="summary-title">
+          <h2>Active employees</h2>
+          <mat-chip-set aria-label="Employee active rate">
+            <mat-chip>{{ summary.totalEmployees ? (summary.activeEmployees / summary.totalEmployees | percent) : '0%' }} active</mat-chip>
+          </mat-chip-set>
+        </div>
+        <strong>{{ summary.activeEmployees | number }}</strong>
+        <p><i class="status-dot teal"></i>from analytics API</p>
+      </mat-card>
+      <mat-card class="summary-card">
+        <div class="summary-title">
+          <h2>Currencies</h2>
+          <mat-chip-set aria-label="Currency grouping"> <mat-chip>per department</mat-chip> </mat-chip-set>
+        </div>
+        <strong>{{ currencies.length }}</strong>
+        <p><i class="status-dot purple"></i>from analytics API</p>
+      </mat-card>
+      <mat-card class="summary-card">
+        <div class="summary-title">
+          <h2>Salary groups</h2>
+          <mat-chip-set aria-label="Department by currency groups">
+            <mat-chip>{{ departments.length }} × {{ currencies.length }}</mat-chip>
+          </mat-chip-set>
+        </div>
+        <strong>{{ salaryGroupCount }}</strong>
+        <p><i class="status-dot orange"></i>from analytics API</p>
+      </mat-card>
+    </section>
+
+    <section class="analysis-grid">
+      <mat-card class="panel headcount-panel">
+        <div class="panel-heading">
+          <h2>Employees by department</h2>
+          <p>Headcount in department endpoint</p>
+        </div>
+        <div class="department-list">
+          @for (department of departments; track department.group; let i = $index) {
+            <div class="department-row">
+              <div class="department-label">
+                <strong>{{ department.group }}</strong>
+                <span>{{ department.employeeCount | number }} employees</span>
+              </div>
+              <div class="headcount-visual">
+                <div class="bar-track">
+                  <div
+                    class="department-bar"
+                    [style.width.%]="barWidth(department.employeeCount)"
+                    [style.background]="colorFor(i)"
+                  ></div>
+                </div>
+                <span>{{ workforceShare(department.employeeCount) | percent:'1.2-2' }} of workforce</span>
+              </div>
+            </div>
+          } @empty {
+            <p class="empty-state">No department analytics were returned.</p>
+          }
+        </div>
+      </mat-card>
+
+      <mat-card class="panel salary-panel">
+        <div class="panel-heading">
+          <h2>Average salary by department &amp; currency</h2>
+          <p>Cell = average salary • local currency • not converted</p>
+        </div>
+        <table
+          mat-table
+          [dataSource]="departments"
+          class="salary-table"
+          aria-label="Average salary by department and currency"
+        >
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef>Department</th>
+            <td mat-cell *matCellDef="let department">{{ department.group }}</td>
+          </ng-container>
+
+          @for (currency of currencies; track currency) {
+            <ng-container [matColumnDef]="currency">
+              <th mat-header-cell *matHeaderCellDef [style.color]="currencyColor(currency)">{{ currency }}</th>
+              <td mat-cell *matCellDef="let department" [style.color]="currencyColor(currency)">
+                @if (averageSalary(department, currency); as salary) {
+                  {{ formatMoney(salary) }}
+                } @else {
+                  <span aria-label="No salary data">—</span>
+                }
+              </td>
+            </ng-container>
+          }
+
+          <tr mat-header-row *matHeaderRowDef="salaryColumns"></tr>
+          <tr mat-row *matRowDef="let department; columns: salaryColumns"></tr>
+        </table>
+      </mat-card>
+    </section>
+
+    <mat-card class="reading-panel">
+      <h2>Reading this view</h2>
+      <p>Salary statistics are grouped by currency inside each department. Use the currency columns for like-for-like comparisons only.</p>
+      <div class="currency-legend" aria-label="Currency color legend">
+        @for (currency of currencies; track currency) {
+          <span><i [style.background]="currencyColor(currency)"></i>{{ currency }}</span>
+        }
+      </div>
+    </mat-card>
+
+    <footer class="data-source">
+      Source: /api/analytics/summary and /api/analytics/by-department&nbsp; · &nbsp;Values shown from live API response
+    </footer>
+  }
 </section>

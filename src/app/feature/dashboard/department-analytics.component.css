@@ -1,9 +1,56 @@
-:host{display:block}
-.department-placeholder .page-header{display:flex;min-height:71px;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:11px;border-bottom:1px solid #dce4ed}
-.page-header h1{margin:0 0 4px;color:#172c48;font-size:30px;line-height:1.15;letter-spacing:-.55px}
-.page-header p{margin:0;color:#7386a2;font-size:14px}
-.department-message{max-width:680px;margin-top:24px;padding:26px;border:1px solid #dce4ed;border-radius:14px;background:#fff;color:#172c48;box-shadow:none}
-.department-message h2{margin:0 0 9px;font-size:18px}
-.department-message p{margin:0 0 20px;color:#7386a2;font-size:13px}
-.department-message a{display:inline-block;background:#193b3e;font-size:12px}
-@media(max-width:620px){.department-placeholder .page-header{min-height:auto;padding-bottom:13px}.page-header h1{font-size:25px}.page-header p{font-size:12px}.department-message{padding:18px}}
+.department-analytics{color:#172c48}
+.department-analytics .page-header{display:flex;min-height:71px;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:11px;border-bottom:1px solid #dce4ed}
+.department-analytics .page-header h1{margin:0 0 4px;font-size:30px;line-height:1.15;letter-spacing:-.55px}
+.department-analytics .page-header p,.department-analytics .panel-heading p{margin:0;color:#7386a2;font-size:14px}
+.department-analytics .updated-label{display:grid;min-width:201px;min-height:43px;place-items:center;padding:0 18px;border:1px solid #dce4ed;border-radius:10px;background:#fff;color:#233b5a;font-size:12px}
+.department-analytics .summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:19px}
+.department-analytics .summary-card,.department-analytics .panel,.department-analytics .reading-panel{border:1px solid #dce4ed;border-radius:14px;background:#fff;box-shadow:none}
+.department-analytics .summary-card{min-height:112px;padding:17px 19px 12px}
+.department-analytics .summary-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.department-analytics .summary-title h2{margin:0;font-size:15px;font-weight:700}
+.department-analytics .summary-title mat-chip-set{flex:none}
+.department-analytics .summary-title mat-chip{min-height:24px;background:#e9f6f3;color:#168971;font-size:10px;font-weight:700}
+.department-analytics .summary-title mat-chip .mdc-evolution-chip__text-label{color:inherit}
+.department-analytics .summary-card>strong{display:block;margin-top:2px;font-size:30px;line-height:1.15;letter-spacing:-.5px}
+.department-analytics .summary-card p{display:flex;align-items:center;gap:7px;margin:6px 0 0;color:#7386a2;font-size:10px}
+.department-analytics .status-dot{width:8px;height:8px;border-radius:50%}
+.department-analytics .status-dot.blue{background:#3978f6}.department-analytics .status-dot.teal{background:#13a6a1}.department-analytics .status-dot.purple{background:#8863de}.department-analytics .status-dot.orange{background:#f49745}
+.department-analytics .analysis-grid{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1fr);gap:19px;margin-top:19px}
+.department-analytics .panel{min-width:0;min-height:541px;padding:17px 19px}
+.department-analytics .panel-heading h2{margin:0 0 5px;font-size:15px;font-weight:700}
+.department-analytics .panel-heading p{font-size:11px}
+.department-analytics .department-list{display:grid;margin-top:5px}
+.department-analytics .department-row{display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:13px;min-height:84px}
+.department-analytics .department-label{display:flex;flex-direction:column;gap:7px}
+.department-analytics .department-label strong{font-size:14px}
+.department-analytics .department-label span,.department-analytics .headcount-visual>span{color:#7386a2;font-size:10px}
+.department-analytics .headcount-visual{display:grid;gap:9px}
+.department-analytics .bar-track{height:21px;overflow:hidden;border-radius:14px;background:#edf2f7}
+.department-analytics .department-bar{height:100%;border-radius:14px}
+.department-analytics .salary-table{width:100%;margin-top:10px;background:transparent}
+.department-analytics .salary-table .mat-mdc-header-row{height:37px}
+.department-analytics .salary-table .mat-mdc-header-cell{padding:0 5px;border-bottom-color:#dce4ed;color:#7185a2;font-size:9px;font-weight:750;text-transform:uppercase}
+.department-analytics .salary-table .mat-mdc-cell{height:67px;padding:0 5px;border-bottom-color:#dce4ed;font-size:12px;font-weight:700;white-space:nowrap}
+.department-analytics .salary-table .mat-column-department{width:25%;color:#172c48}
+.department-analytics .salary-table .mat-column-CAD{color:#3978f6}
+.department-analytics .salary-table .mat-column-EUR{color:#13a6a1}
+.department-analytics .salary-table .mat-column-GBP{color:#8863de}
+.department-analytics .salary-table .mat-column-INR{color:#f49745}
+.department-analytics .salary-table .mat-column-USD{color:#617f9c}
+.department-analytics .reading-panel{margin-top:19px;min-height:100px;padding:17px 19px}
+.department-analytics .reading-panel h2{margin:0 0 6px;font-size:15px}
+.department-analytics .reading-panel p{margin:0;color:#7386a2;font-size:11px}
+.department-analytics .currency-legend{display:flex;flex-wrap:wrap;gap:18px;margin-top:6px}
+.department-analytics .currency-legend span{display:flex;align-items:center;gap:6px;color:#7386a2;font-size:10px;font-weight:700}
+.department-analytics .currency-legend i{width:9px;height:9px;border-radius:50%}
+.department-analytics .data-source{margin-top:32px;color:#7386a2;font-size:11px}
+.department-analytics .loading-state,.department-analytics .error-state{margin-top:20px;padding:22px;border:1px solid #dce4ed;border-radius:12px;background:#fff;color:#536882;font-size:13px;box-shadow:none}
+.department-analytics .loading-state p{margin:14px 0 0;font-size:13px}
+.department-analytics .loading-state mat-progress-bar{--mdc-linear-progress-active-indicator-color:#3978f6;--mdc-linear-progress-track-color:#e5edf8}
+.department-analytics .error-state{display:flex;align-items:center;justify-content:space-between;gap:14px;border-color:#f1d4d1;background:#fff9f8;color:#9c342d}
+.department-analytics .error-state button{background:#193b3e;font-size:12px}
+.department-analytics .empty-state{color:#7386a2;font-size:12px}
+@media(max-width:1200px){.department-analytics .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.department-analytics .analysis-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1fr)}.department-analytics .department-row{grid-template-columns:125px minmax(0,1fr);gap:9px}.department-analytics .panel{padding:15px}}
+@media(max-width:900px){.department-analytics .analysis-grid{grid-template-columns:1fr}.department-analytics .panel{min-height:auto}.department-analytics .department-row{grid-template-columns:160px minmax(0,1fr)}.department-analytics .salary-table .mat-mdc-cell{height:58px}.department-analytics .data-source{margin-top:24px}}
+@media(max-width:620px){.department-analytics .page-header{min-height:auto;align-items:flex-start;padding-bottom:13px}.department-analytics .page-header h1{font-size:25px}.department-analytics .page-header p{max-width:250px;font-size:12px}.department-analytics .updated-label{min-width:unset;min-height:34px;padding:0 9px;font-size:10px;white-space:nowrap}.department-analytics .summary-grid{gap:10px;margin-top:13px}.department-analytics .summary-card{min-height:102px;padding:12px}.department-analytics .summary-title h2{font-size:12px}.department-analytics .summary-title mat-chip{min-height:21px;font-size:9px}.department-analytics .summary-card>strong{margin-top:6px;font-size:26px}.department-analytics .analysis-grid{gap:12px;margin-top:12px}.department-analytics .panel{padding:15px 13px}.department-analytics .department-row{grid-template-columns:105px minmax(0,1fr);gap:8px;min-height:75px}.department-analytics .department-label strong{font-size:12px}.department-analytics .department-label span,.department-analytics .headcount-visual>span{font-size:9px}.department-analytics .bar-track{height:18px}.department-analytics .salary-panel{overflow-x:auto}.department-analytics .salary-table{min-width:480px;margin-top:6px}.department-analytics .salary-table .mat-mdc-header-cell{padding:0 4px;font-size:8px}.department-analytics .salary-table .mat-mdc-cell{height:55px;padding:0 4px;font-size:10px}.department-analytics .salary-table .mat-column-department{width:28%}.department-analytics .reading-panel{margin-top:12px;padding:15px 13px}.department-analytics .currency-legend{gap:10px}.department-analytics .data-source{margin-top:20px;font-size:10px;line-height:1.6}}
+@media(max-width:370px){.department-analytics .updated-label{font-size:9px}.department-analytics .summary-title{align-items:flex-start;flex-direction:column}.department-analytics .summary-title mat-chip{min-height:19px}.department-analytics .department-row{grid-template-columns:90px minmax(0,1fr);gap:6px}}
