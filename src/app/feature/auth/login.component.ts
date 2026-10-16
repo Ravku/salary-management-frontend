@@ -1,13 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { finalize } from 'rxjs';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [MatButtonModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -20,16 +24,15 @@ export class LoginComponent {
   isSubmitting = false;
   showPassword = false;
   errorMessage = '';
-  successMessage = '';
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly router: Router
   ) {}
 
   submit(): void {
     this.errorMessage = '';
-    this.successMessage = '';
 
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -40,9 +43,7 @@ export class LoginComponent {
     this.authService.login(this.loginForm.getRawValue())
       .pipe(finalize(() => this.isSubmitting = false))
       .subscribe({
-        next: () => {
-          this.successMessage = 'You are signed in successfully.';
-        },
+        next: () => this.router.navigateByUrl('/dashboard/country'),
         error: (error: unknown) => {
           this.errorMessage = this.getErrorMessage(error);
         }
@@ -51,7 +52,9 @@ export class LoginComponent {
 
   private getErrorMessage(error: unknown): string {
     if (!(error instanceof HttpErrorResponse)) {
-      return 'Something went wrong. Please try again.';
+      return error instanceof Error
+        ? error.message
+        : 'Something went wrong. Please try again.';
     }
 
     if (error.status === 0) {

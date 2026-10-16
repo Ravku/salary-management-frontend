@@ -25,7 +25,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/material-theme.scss",
+              "src/styles.css",
+              "src/app/feature/dashboard/dashboard.component.css",
+              "src/app/feature/dashboard/country-analytics.component.css",
+              "src/app/feature/dashboard/department-analytics.component.css"
             ],
             "scripts": []
           },
@@ -84,7 +88,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/material-theme.scss",
+              "src/styles.css",
+              "src/app/feature/dashboard/dashboard.component.css",
+              "src/app/feature/dashboard/country-analytics.component.css",
+              "src/app/feature/dashboard/department-analytics.component.css"
             ],
             "scripts": []
           }

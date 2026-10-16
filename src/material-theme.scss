@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+$salary-primary: mat.define-palette(mat.$indigo-palette, 700, 500, 800);
+$salary-accent: mat.define-palette(mat.$teal-palette, 600, 400, 800);
+$salary-warn: mat.define-palette(mat.$red-palette);
+
+$salary-theme: mat.define-light-theme((
+  color: (
+    primary: $salary-primary,
+    accent: $salary-accent,
+    warn: $salary-warn
+  ),
+  density: -1
+));
+
+@include mat.button-theme($salary-theme);
+@include mat.card-theme($salary-theme);
+@include mat.chips-theme($salary-theme);
+@include mat.form-field-theme($salary-theme);
+@include mat.input-theme($salary-theme);
+@include mat.list-theme($salary-theme);
+@include mat.progress-bar-theme($salary-theme);
+@include mat.table-theme($salary-theme);

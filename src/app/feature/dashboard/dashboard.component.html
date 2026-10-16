@@ -1,0 +1,29 @@
+<div class="dashboard-shell">
+  <aside class="sidebar">
+    <a class="brand" routerLink="/dashboard/country" aria-label="People Analytics dashboard">
+      <span class="brand-name">PEOPLE</span>
+      <span class="brand-caption">ANALYTICS</span>
+    </a>
+
+    <mat-nav-list class="side-navigation" aria-label="Analytics navigation">
+      <a mat-list-item class="nav-link" routerLink="/dashboard/country" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <span matListItemIcon><span class="nav-dot" aria-hidden="true"></span></span>
+        <span matListItemTitle>By Country</span>
+      </a>
+      <a mat-list-item class="nav-link" routerLink="/dashboard/department" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <span matListItemIcon><span class="nav-dot" aria-hidden="true"></span></span>
+        <span matListItemTitle>By Department</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="sidebar-footer">
+      <span class="live-indicator" aria-hidden="true"></span>
+      <span>API DATA&nbsp; · &nbsp;LIVE</span>
+      <button mat-button type="button" (click)="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="dashboard-main">
+    <router-outlet />
+  </main>
+</div>

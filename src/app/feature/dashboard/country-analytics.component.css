@@ -1,0 +1,62 @@
+.dashboard-country{color:#172c48}
+.dashboard-country .page-header{display:flex;min-height:71px;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:11px;border-bottom:1px solid #dce4ed}
+.dashboard-country .page-header h1{margin:0 0 4px;font-size:30px;line-height:1.15;letter-spacing:-.55px}
+.dashboard-country .page-header p,.dashboard-country .panel-heading p{margin:0;color:#7386a2;font-size:14px}
+.dashboard-country .updated-label{display:grid;min-width:201px;min-height:43px;place-items:center;padding:0 18px;border:1px solid #dce4ed;border-radius:10px;background:#fff;color:#233b5a;font-size:12px}
+.dashboard-country .summary-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;margin-top:19px}
+.dashboard-country .summary-card,.dashboard-country .panel{border:1px solid #dce4ed;border-radius:14px;background:#fff;box-shadow:none}
+.dashboard-country .summary-card{min-height:112px;padding:17px 19px 12px}
+.dashboard-country .summary-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.dashboard-country .summary-title h2{margin:0;font-size:15px;font-weight:700}
+.dashboard-country .summary-title mat-chip-set{flex:none}
+.dashboard-country .summary-title mat-chip{min-height:24px;background:#e9f6f3;color:#168971;font-size:10px;font-weight:700}
+.dashboard-country .summary-title mat-chip .mdc-evolution-chip__text-label{color:inherit}
+.dashboard-country .summary-card>strong{display:block;margin-top:2px;font-size:30px;line-height:1.15;letter-spacing:-.5px}
+.dashboard-country .summary-card p{display:flex;align-items:center;gap:7px;margin:6px 0 0;color:#7386a2;font-size:10px}
+.dashboard-country .status-dot{width:8px;height:8px;border-radius:50%}
+.dashboard-country .status-dot.blue{background:#3978f6}.dashboard-country .status-dot.teal{background:#13a6a1}.dashboard-country .status-dot.purple{background:#8863de}.dashboard-country .status-dot.orange{background:#f49745}
+.dashboard-country .analysis-grid{display:grid;grid-template-columns:minmax(0,1.57fr) minmax(400px,1fr);gap:19px;margin-top:19px}
+.dashboard-country .panel{min-width:0;padding:17px 19px}
+.dashboard-country .employee-panel,.dashboard-country .salary-panel{min-height:461px}
+.dashboard-country .panel-heading h2{margin:0 0 5px;font-size:15px;font-weight:700}
+.dashboard-country .panel-heading p{font-size:11px}
+.dashboard-country .employee-list{display:grid;gap:0;margin-top:5px}
+.dashboard-country .employee-row{display:grid;grid-template-columns:125px minmax(40px,1fr) 110px;align-items:center;gap:13px;min-height:70px}
+.dashboard-country .country-label,.dashboard-country .employee-count{display:flex;flex-direction:column;gap:5px}
+.dashboard-country .country-label strong,.dashboard-country .employee-count strong{font-size:14px}
+.dashboard-country .country-label span,.dashboard-country .employee-count span{color:#7386a2;font-size:10px}
+.dashboard-country .bar-track{height:23px;overflow:hidden;border-radius:14px;background:#edf2f7}
+.dashboard-country .employee-bar{height:100%;border-radius:14px}
+.dashboard-country .employee-count{gap:3px}
+.dashboard-country .panel-footnote{margin:11px 2px 0;color:#7386a2;font-size:11px}
+.dashboard-country .salary-table{width:100%;margin-top:3px;background:transparent}
+.dashboard-country .salary-table .mat-mdc-header-row{height:31px}
+.dashboard-country .salary-table .mat-mdc-header-cell{padding:0 4px;color:#7185a2;font-size:9px;font-weight:750;text-transform:uppercase}
+.dashboard-country .salary-table .mat-mdc-row{height:65px}
+.dashboard-country .salary-table .mat-mdc-cell{padding:0 4px;border-bottom-color:#dce4ed;font-size:12px;font-weight:700}
+.dashboard-country .salary-table .mat-column-country{width:39%}
+.dashboard-country .salary-table .mat-column-averageSalary{width:33%}
+.dashboard-country .salary-table .mat-column-totalSalary{width:28%}
+.dashboard-country .salary-country{display:flex;align-items:flex-start;gap:9px}
+.dashboard-country .salary-country>span{display:flex;flex-direction:column;gap:5px}
+.dashboard-country .salary-country strong{font-size:13px}
+.dashboard-country .salary-country small{color:#7386a2;font-size:10px}
+.dashboard-country .country-dot{width:11px;height:11px;flex:none;margin-top:2px;border-radius:50%}
+.dashboard-country .averages-panel{margin-top:19px;min-height:170px}
+.dashboard-country .average-list{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:25px;margin-top:5px}
+.dashboard-country .average-item{display:grid;gap:7px}
+.dashboard-country .average-item>strong{font-size:13px}
+.dashboard-country .average-item>span{font-size:12px;font-weight:700}
+.dashboard-country .average-track{height:12px;overflow:hidden;border-radius:8px;background:#edf2f7}
+.dashboard-country .average-track i{display:block;width:100%;height:100%;border-radius:8px}
+.dashboard-country .data-source{margin-top:41px;color:#7386a2;font-size:11px}
+.dashboard-country .loading-state,.dashboard-country .error-state{margin-top:20px;padding:22px;border:1px solid #dce4ed;border-radius:12px;background:#fff;color:#536882;font-size:13px;box-shadow:none}
+.dashboard-country .loading-state p{margin:14px 0 0;font-size:13px}
+.dashboard-country .loading-state mat-progress-bar{--mdc-linear-progress-active-indicator-color:#3978f6;--mdc-linear-progress-track-color:#e5edf8}
+.dashboard-country .error-state{display:flex;align-items:center;justify-content:space-between;gap:14px;border-color:#f1d4d1;background:#fff9f8;color:#9c342d}
+.dashboard-country .error-state button{background:#193b3e;font-size:12px}
+.dashboard-country .empty-state{color:#7386a2;font-size:12px}
+@media(max-width:1200px){.dashboard-country .summary-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dashboard-country .analysis-grid{grid-template-columns:minmax(0,1.2fr) minmax(360px,1fr)}.dashboard-country .employee-row{grid-template-columns:100px minmax(30px,1fr) 88px;gap:9px}}
+@media(max-width:900px){.dashboard-country .analysis-grid{grid-template-columns:1fr}.dashboard-country .employee-panel,.dashboard-country .salary-panel{min-height:auto}.dashboard-country .salary-row{min-height:60px}.dashboard-country .data-source{margin-top:24px}}
+@media(max-width:620px){.dashboard-country .page-header{min-height:auto;align-items:flex-start;padding-bottom:13px}.dashboard-country .page-header h1{font-size:25px}.dashboard-country .page-header p{max-width:250px;font-size:12px}.dashboard-country .updated-label{min-width:unset;min-height:34px;padding:0 9px;font-size:10px;white-space:nowrap}.dashboard-country .summary-grid{gap:10px;margin-top:13px}.dashboard-country .summary-card{min-height:102px;padding:12px}.dashboard-country .summary-title h2{font-size:12px}.dashboard-country .summary-title mat-chip{min-height:21px;font-size:9px}.dashboard-country .summary-card>strong{margin-top:6px;font-size:26px}.dashboard-country .analysis-grid{gap:12px;margin-top:12px}.dashboard-country .panel{padding:15px 13px}.dashboard-country .employee-row{grid-template-columns:81px minmax(25px,1fr) 68px;gap:7px;min-height:64px}.dashboard-country .country-label strong,.dashboard-country .employee-count strong{font-size:12px}.dashboard-country .country-label span,.dashboard-country .employee-count span{font-size:9px}.dashboard-country .bar-track{height:18px}.dashboard-country .employee-count{overflow-wrap:anywhere}.dashboard-country .panel-footnote{font-size:10px}.dashboard-country .salary-table .mat-mdc-header-cell{padding:0 2px;font-size:8px}.dashboard-country .salary-table .mat-mdc-cell{padding:0 2px;font-size:10px}.dashboard-country .salary-country{gap:6px}.dashboard-country .salary-country strong{font-size:11px}.dashboard-country .salary-country small{font-size:9px}.dashboard-country .country-dot{width:9px;height:9px}.dashboard-country .average-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.dashboard-country .average-item>strong{font-size:12px}.dashboard-country .average-item>span{font-size:11px}.dashboard-country .averages-panel{margin-top:12px}.dashboard-country .data-source{margin-top:20px;font-size:10px;line-height:1.6}}
+@media(max-width:370px){.dashboard-country .updated-label{font-size:9px}.dashboard-country .summary-title{align-items:flex-start;flex-direction:column}.dashboard-country .employee-row{grid-template-columns:70px minmax(20px,1fr) 62px;gap:5px}}

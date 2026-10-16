@@ -8,6 +8,7 @@ describe('AuthService', () => {
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
+    localStorage.clear();
     TestBed.configureTestingModule({
       providers: [provideHttpClient(), provideHttpClientTesting()]
     });
@@ -27,7 +28,20 @@ describe('AuthService', () => {
     expect(request.request.method).toBe('POST');
     expect(request.request.body).toEqual(credentials);
 
-    request.flush({ authenticated: true });
-    expect(response).toEqual({ authenticated: true });
+    request.flush({ accessToken: 'test-bearer-token' });
+    expect(response).toBeUndefined();
+    expect(authService.getToken()).toBe('test-bearer-token');
+  });
+
+  it('rejects login responses that do not contain a bearer token', () => {
+    let error: unknown;
+
+    authService.login({ username: 'employee', password: 'secret' }).subscribe({
+      error: result => error = result
+    });
+
+    httpTestingController.expectOne('http://localhost:8080/api/auth/login').flush({ authenticated: true });
+    expect(error).toEqual(jasmine.any(Error));
+    expect(authService.getToken()).toBeNull();
   });
 });

@@ -1,0 +1,9 @@
+:host{display:block}
+.department-placeholder .page-header{display:flex;min-height:71px;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:11px;border-bottom:1px solid #dce4ed}
+.page-header h1{margin:0 0 4px;color:#172c48;font-size:30px;line-height:1.15;letter-spacing:-.55px}
+.page-header p{margin:0;color:#7386a2;font-size:14px}
+.department-message{max-width:680px;margin-top:24px;padding:26px;border:1px solid #dce4ed;border-radius:14px;background:#fff;color:#172c48;box-shadow:none}
+.department-message h2{margin:0 0 9px;font-size:18px}
+.department-message p{margin:0 0 20px;color:#7386a2;font-size:13px}
+.department-message a{display:inline-block;background:#193b3e;font-size:12px}
+@media(max-width:620px){.department-placeholder .page-header{min-height:auto;padding-bottom:13px}.page-header h1{font-size:25px}.page-header p{font-size:12px}.department-message{padding:18px}}
