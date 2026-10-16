@@ -1,0 +1,119 @@
+<main class="login-page">
+  <section class="welcome-panel" aria-label="About the salary management system">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M6 25V13.5L16 7l10 6.5V25H6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 25v-7h8v7M11 13h.01M16 13h.01M21 13h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>Northstar<span class="brand-light">People</span></span>
+    </div>
+
+    <div class="welcome-copy">
+      <span class="eyebrow">PEOPLE, MADE SIMPLE</span>
+      <h1>Everything your team needs, <em>in one place.</em></h1>
+      <p>Manage payroll, support your people, and keep every detail moving in the right direction.</p>
+
+    </div>
+
+  </section>
+
+  <section class="form-panel">
+    <div class="mobile-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M6 25V13.5L16 7l10 6.5V25H6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 25v-7h8v7M11 13h.01M16 13h.01M21 13h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <span>Northstar<span class="brand-light">People</span></span>
+    </div>
+
+    <div class="login-content">
+      <div class="form-intro">
+        <span class="eyebrow form-eyebrow">EMPLOYEE PORTAL</span>
+        <h2>Welcome back</h2>
+        <p>Sign in to manage your salary and employee account.</p>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="submit()" novalidate>
+        <div class="field">
+          <label for="username">Username</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5" stroke="currentColor" stroke-width="1.7"/>
+              <path d="M5 20c.4-3.3 3.2-5.5 7-5.5s6.6 2.2 7 5.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            <input
+              id="username"
+              type="text"
+              formControlName="username"
+              placeholder="Enter your username"
+              autocomplete="username"
+              autocapitalize="none"
+              [attr.aria-invalid]="loginForm.controls.username.touched && loginForm.controls.username.invalid"
+              aria-describedby="username-error"
+            />
+          </div>
+          @if (loginForm.controls.username.touched && loginForm.controls.username.hasError('required')) {
+            <span class="field-error" id="username-error">Please enter your username.</span>
+          }
+        </div>
+
+        <div class="field">
+          <label for="password">Password</label>
+          <div class="input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/>
+              <path d="M8 10V7a4 4 0 1 1 8 0v3M12 14v2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+            </svg>
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              [attr.aria-invalid]="loginForm.controls.password.touched && loginForm.controls.password.invalid"
+              aria-describedby="password-error"
+            />
+            <button
+              class="password-toggle"
+              type="button"
+              (click)="showPassword = !showPassword"
+              [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+            >{{ showPassword ? 'Hide' : 'Show' }}</button>
+          </div>
+          @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
+            <span class="field-error" id="password-error">Please enter your password.</span>
+          }
+        </div>
+
+        @if (errorMessage) {
+          <div class="form-feedback error-feedback" role="alert">{{ errorMessage }}</div>
+        }
+        @if (successMessage) {
+          <div class="form-feedback success-feedback" role="status">{{ successMessage }}</div>
+        }
+
+        <button class="submit-button" type="submit" [disabled]="isSubmitting">
+          @if (isSubmitting) {
+            <span class="spinner" aria-hidden="true"></span>
+            <span>Signing in...</span>
+          } @else {
+            <span>Sign in to your account</span>
+            <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M4 10h12m-5-5 5 5-5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          }
+        </button>
+      </form>
+
+      <div class="help-note">
+        <span class="help-icon" aria-hidden="true">?</span>
+        <span>Need help signing in? Contact your HR team</span>
+      </div>
+    </div>
+    <div class="form-footer">© 2026 Northstar People <span>·</span> Employee Salary Management</div>
+  </section>
+</main>

@@ -1,0 +1,44 @@
+:host{display:block;min-height:100vh;color:#192b3d;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.login-page{display:grid;grid-template-columns:1fr 1fr;min-height:100vh;background:#fff}
+.welcome-panel{display:flex;flex-direction:column;padding:40px clamp(30px,7vw,96px) 30px;background:#102b35;color:#f5f8f4}
+.brand,.mobile-brand{display:flex;align-items:center;gap:11px;font-size:17px;font-weight:650}
+.brand-mark{display:grid;width:38px;height:38px;place-items:center;border:1px solid #ffffff37;border-radius:12px;color:#c6dfad}
+.brand-mark svg{width:26px;height:26px}
+.brand-light{color:#c3d0cd;font-weight:400}
+.welcome-copy{width:min(100%,450px);margin:auto 0}
+.eyebrow{color:#b8d99c;font-size:10px;font-weight:700;letter-spacing:1.8px}
+.welcome-copy h1{margin:17px 0 15px;font:400 clamp(38px,4vw,54px)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-1.4px}
+.welcome-copy h1 em{color:#c1dba6}
+.welcome-copy>p{max-width:385px;margin:0;color:#c2cdca;font-size:14px;line-height:1.8}
+.form-panel{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 30px 24px}
+.login-content{width:min(100%,380px);margin:auto 0}
+.form-intro{margin-bottom:32px}
+.form-eyebrow{color:#71816e}
+.form-intro h2{margin:11px 0 8px;color:#1c2e36;font:400 37px Georgia,"Times New Roman",serif}
+.form-intro p{margin:0;color:#7c898c;font-size:13px;line-height:1.6}
+.field{margin-bottom:19px}
+.field label{display:block;margin-bottom:8px;color:#34454b;font-size:11px;font-weight:650}
+.input-wrap{display:flex;height:48px;align-items:center;gap:11px;padding:0 13px;border:1px solid #dce3e1;border-radius:7px}
+.input-wrap:focus-within{border-color:#7e9b6c;box-shadow:0 0 0 3px #829d6e1c}
+.input-wrap>svg{width:18px;height:18px;flex:none;color:#8b9a99}
+.input-wrap input{width:100%;min-width:0;height:100%;border:0;outline:0;background:transparent;color:#23373d;font:12px sans-serif}
+.input-wrap:has(input[aria-invalid=true]){border-color:#c55c53}
+.password-toggle{flex:none;border:0;background:transparent;color:#71886a;font:650 10px sans-serif;cursor:pointer}
+.field-error{display:block;margin-top:6px;color:#ad3f37;font-size:10px}
+.form-feedback{margin:-2px 0 16px;padding:11px 12px;border-radius:6px;font-size:11px;line-height:1.5}
+.error-feedback{border:1px solid #f1d4d1;background:#fff7f6;color:#9c342d}
+.success-feedback{border:1px solid #d4e8cd;background:#f5faf2;color:#3c6b35}
+.submit-button{display:flex;width:100%;height:48px;align-items:center;justify-content:center;gap:10px;border:0;border-radius:7px;background:#193b3e;color:#fff;font:650 12px sans-serif;cursor:pointer}
+.submit-button:hover:not(:disabled){background:#245251}
+.submit-button:focus-visible,.password-toggle:focus-visible{outline:3px solid #89a979;outline-offset:3px}
+.submit-button:disabled{opacity:.7;cursor:wait}
+.submit-button svg{width:17px;height:17px}
+.spinner{width:15px;height:15px;border:2px solid #ffffff55;border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.help-note{display:flex;align-items:center;gap:9px;margin-top:25px;color:#7a888b;font-size:10px}
+.help-icon{display:grid;width:18px;height:18px;place-items:center;border:1px solid #d5dedd;border-radius:50%}
+.form-footer{width:100%;margin-top:auto;padding-top:24px;color:#9aa5a5;text-align:center;font-size:9px}
+.form-footer span{padding:0 5px;color:#c3cac8}
+.mobile-brand{display:none}
+@media(max-width:700px){.login-page{display:block;min-height:100vh;background:#f8faf8}.welcome-panel{display:none}.form-panel{min-height:100vh;justify-content:flex-start;padding:22px 24px 18px}.mobile-brand{display:flex;align-self:flex-start;color:#18363a}.mobile-brand .brand-mark{border-color:#dce5df;color:#476b54}.mobile-brand .brand-light{color:#60726e}.login-content{width:min(100%,390px);margin:auto 0}.form-intro{margin-bottom:27px}.form-intro h2{font-size:34px}.form-footer{margin-top:22px;padding-top:20px}}
+@media(max-width:380px){.form-panel{padding-right:18px;padding-left:18px}.form-intro h2{font-size:31px}}
