@@ -4,12 +4,27 @@
       <h1>Department analytics</h1>
       <p>Department headcount and salary averages, segmented by currency</p>
     </div>
-    <div class="updated-label">
-      @if (updatedAt) {
-        Updated {{ updatedAt | date:'shortTime' }}
-      } @else {
-        Waiting for analytics
-      }
+    <div class="header-actions">
+      <div class="updated-label">
+        @if (updatedAt) {
+          Updated {{ updatedAt | date:'shortTime' }}
+        } @else {
+          Waiting for analytics
+        }
+      </div>
+      <button
+        mat-icon-button
+        class="refresh-button"
+        type="button"
+        aria-label="Refresh department analytics"
+        title="Refresh analytics"
+        [disabled]="isLoading"
+        (click)="loadAnalytics()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" [class.spinning]="isLoading">
+          <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.93 9h-2.02A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35Z"/>
+        </svg>
+      </button>
     </div>
   </header>
 
@@ -33,7 +48,7 @@
           </mat-chip-set>
         </div>
         <strong>{{ summary.totalEmployees | number }}</strong>
-        <p><i class="status-dot blue"></i>from analytics API</p>
+        <p><i class="status-dot blue"></i>Across all departments</p>
       </mat-card>
       <mat-card class="summary-card">
         <div class="summary-title">
@@ -43,7 +58,7 @@
           </mat-chip-set>
         </div>
         <strong>{{ summary.activeEmployees | number }}</strong>
-        <p><i class="status-dot teal"></i>from analytics API</p>
+        <p><i class="status-dot teal"></i>Currently active</p>
       </mat-card>
       <mat-card class="summary-card">
         <div class="summary-title">
@@ -51,7 +66,7 @@
           <mat-chip-set aria-label="Currency grouping"> <mat-chip>per department</mat-chip> </mat-chip-set>
         </div>
         <strong>{{ currencies.length }}</strong>
-        <p><i class="status-dot purple"></i>from analytics API</p>
+        <p><i class="status-dot purple"></i>Represented in departments</p>
       </mat-card>
       <mat-card class="summary-card">
         <div class="summary-title">
@@ -61,7 +76,7 @@
           </mat-chip-set>
         </div>
         <strong>{{ salaryGroupCount }}</strong>
-        <p><i class="status-dot orange"></i>from analytics API</p>
+        <p><i class="status-dot orange"></i>Department-currency combinations</p>
       </mat-card>
     </section>
 
@@ -69,7 +84,6 @@
       <mat-card class="panel headcount-panel">
         <div class="panel-heading">
           <h2>Employees by department</h2>
-          <p>Headcount in department endpoint</p>
         </div>
         <div class="department-list">
           @for (department of departments; track department.group; let i = $index) {
@@ -141,7 +155,7 @@
     </mat-card>
 
     <footer class="data-source">
-      Source: /api/analytics/summary and /api/analytics/by-department&nbsp; · &nbsp;Values shown from live API response
+      Created by: Ravindra Kumar | Created For: incubyte
     </footer>
   }
 </section>

@@ -4,12 +4,27 @@
       <h1>Country analytics</h1>
       <p>Headcount and salary statistics by employee country</p>
     </div>
-    <div class="updated-label">
-      @if (updatedAt) {
-        Updated {{ updatedAt | date:'shortTime' }}
-      } @else {
-        Waiting for analytics
-      }
+    <div class="header-actions">
+      <div class="updated-label">
+        @if (updatedAt) {
+          Updated {{ updatedAt | date:'shortTime' }}
+        } @else {
+          Waiting for analytics
+        }
+      </div>
+      <button
+        mat-icon-button
+        class="refresh-button"
+        type="button"
+        aria-label="Refresh country analytics"
+        title="Refresh analytics"
+        [disabled]="isLoading"
+        (click)="loadAnalytics()"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true" [class.spinning]="isLoading">
+          <path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.93 9h-2.02A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35Z"/>
+        </svg>
+      </button>
     </div>
   </header>
 
@@ -27,29 +42,29 @@
     <section class="summary-grid" aria-label="Analytics summary">
       <mat-card class="summary-card">
         <div class="summary-title">
-          <h2>Total employees</h2>
+          <h2>Total Employees</h2>
           <mat-chip-set aria-label="Country count"><mat-chip>{{ countries.length }} countries</mat-chip></mat-chip-set>
         </div>
         <strong>{{ summary.totalEmployees | number }}</strong>
-        <p><i class="status-dot blue"></i>from analytics API</p>
+        <p><i class="status-dot blue"></i>Across all countries</p>
       </mat-card>
       <mat-card class="summary-card">
         <div class="summary-title">
-          <h2>Active employees</h2>
+          <h2>Active Employees</h2>
           <mat-chip-set aria-label="Employee active rate">
             <mat-chip>{{ summary.totalEmployees ? (summary.activeEmployees / summary.totalEmployees | percent) : '0%' }} active</mat-chip>
           </mat-chip-set>
         </div>
         <strong>{{ summary.activeEmployees | number }}</strong>
-        <p><i class="status-dot teal"></i>from analytics API</p>
+        <p><i class="status-dot blue"></i>Currently active</p>
       </mat-card>
       <mat-card class="summary-card">
         <div class="summary-title">
           <h2>Countries</h2>
-          <mat-chip-set aria-label="Country data source"><mat-chip>API groups</mat-chip></mat-chip-set>
+          <mat-chip-set aria-label="Country data source"><mat-chip>Country groups</mat-chip></mat-chip-set>
         </div>
         <strong>{{ countries.length }}</strong>
-        <p><i class="status-dot purple"></i>from analytics API</p>
+        <p><i class="status-dot blue"></i>Distinct countries</p>
       </mat-card>
       <mat-card class="summary-card">
         <div class="summary-title">
@@ -57,7 +72,7 @@
           <mat-chip-set aria-label="Currency display"><mat-chip>local amounts</mat-chip></mat-chip-set>
         </div>
         <strong>{{ currencyCount }}</strong>
-        <p><i class="status-dot orange"></i>from analytics API</p>
+        <p><i class="status-dot blue"></i>Local currencies</p>
       </mat-card>
     </section>
 
@@ -136,7 +151,7 @@
     </mat-card>
 
     <footer class="data-source">
-      Source: /api/analytics/summary and /api/analytics/by-country&nbsp; · &nbsp;Values shown from live API response
+      Created by: Ravindra Kumar | Created For: incubyte
     </footer>
   }
 </div>

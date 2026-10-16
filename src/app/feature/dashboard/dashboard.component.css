@@ -17,8 +17,10 @@ app-dashboard{display:block;min-height:100vh;color:#172c48;font-family:Inter,-ap
 .nav-link.active .nav-dot{background:#83adff}
 .sidebar-footer{display:flex;align-items:center;gap:7px;margin-top:auto;padding:0 12px;color:#8ed5c4;font-size:11px;font-weight:700}
 .live-indicator{width:7px;height:7px;border-radius:50%;background:#23bea0;box-shadow:0 0 0 3px #23bea022}
-.sidebar-footer .mat-mdc-button{min-width:0;margin-left:auto;padding:0;color:#aebdd0;font-size:10px}
-.sidebar-footer .mat-mdc-button:hover{color:#fff}
+.sidebar-footer .mat-mdc-button{--mdc-text-button-label-text-color:#8ed5c4;min-width:0;min-height:30px;margin-left:auto;padding:0 11px;border:1px solid #48617d;border-radius:7px;background:#29425e;color:#8ed5c4;font-size:10px}
+.sidebar-footer .mat-mdc-button .mdc-button__label{color:#8ed5c4}
+.sidebar-footer .mat-mdc-button:hover{--mdc-text-button-label-text-color:#fff;border-color:#7590ad;background:#365575;color:#fff}
+.sidebar-footer .mat-mdc-button:hover .mdc-button__label{color:#fff}
 .dashboard-main{min-width:0;padding:31px clamp(22px,2.6vw,42px) 30px}
 @media(max-width:900px){.dashboard-shell{grid-template-columns:190px minmax(0,1fr)}}
 @media(max-width:620px){.dashboard-shell{display:block}.sidebar{position:static;width:auto;height:auto;padding:15px 16px 12px}.brand{margin:0;padding:0 5px 12px}.brand-name{font-size:17px}.side-navigation{display:flex;gap:6px;margin-top:12px}.side-navigation .nav-link{min-height:38px;font-size:12px}.side-navigation .nav-link .mat-mdc-list-item-icon{margin-right:6px}.nav-dot{width:8px;height:8px}.sidebar-footer{display:none}.dashboard-main{padding:21px 15px 26px}}
