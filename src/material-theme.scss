@@ -18,8 +18,10 @@ $salary-theme: mat.define-light-theme((
 @include mat.button-theme($salary-theme);
 @include mat.card-theme($salary-theme);
 @include mat.chips-theme($salary-theme);
+@include mat.checkbox-theme($salary-theme);
 @include mat.form-field-theme($salary-theme);
 @include mat.input-theme($salary-theme);
 @include mat.list-theme($salary-theme);
+@include mat.paginator-theme($salary-theme);
 @include mat.progress-bar-theme($salary-theme);
 @include mat.table-theme($salary-theme);

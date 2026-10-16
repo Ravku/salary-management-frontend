@@ -1,0 +1,211 @@
+<section class="employees-page">
+  <header class="employees-header">
+    <div>
+      <h1>Employees</h1>
+      <p>View, add, and update employee records</p>
+    </div>
+    <button mat-flat-button color="primary" type="button" (click)="showCreateForm()">
+      Add employee
+    </button>
+  </header>
+
+  @if (successMessage) {
+    <div class="success-message" role="status">{{ successMessage }}</div>
+  }
+
+  @if (errorMessage) {
+    <mat-card class="error-panel" role="alert">
+      <span>{{ errorMessage }}</span>
+      <button mat-button type="button" (click)="loadEmployees()">Retry</button>
+    </mat-card>
+  }
+
+  @if (formVisible) {
+    <mat-card class="employee-form-panel">
+      <div class="panel-heading">
+        <div>
+          <h2>{{ editingEmployeeId === null ? 'Add employee' : 'Edit employee' }}</h2>
+          <p>Enter the employee details below.</p>
+        </div>
+        <button mat-button type="button" (click)="closeForm()">Cancel</button>
+      </div>
+
+      @if (formErrorMessage) {
+        <div class="form-error" role="alert">{{ formErrorMessage }}</div>
+      }
+
+      <form [formGroup]="employeeForm" (ngSubmit)="saveEmployee()">
+        <div class="form-grid">
+          <mat-form-field appearance="outline">
+            <mat-label>Employee code</mat-label>
+            <input matInput formControlName="employeeCode" autocomplete="off">
+            @if (employeeForm.controls.employeeCode.hasError('required') && employeeForm.controls.employeeCode.touched) {
+              <mat-error>Employee code is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput formControlName="firstName" autocomplete="given-name">
+            @if (employeeForm.controls.firstName.hasError('required') && employeeForm.controls.firstName.touched) {
+              <mat-error>First name is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput formControlName="lastName" autocomplete="family-name">
+            @if (employeeForm.controls.lastName.hasError('required') && employeeForm.controls.lastName.touched) {
+              <mat-error>Last name is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" autocomplete="email">
+            @if (employeeForm.controls.email.hasError('required') && employeeForm.controls.email.touched) {
+              <mat-error>Email is required.</mat-error>
+            } @else if (employeeForm.controls.email.hasError('email') && employeeForm.controls.email.touched) {
+              <mat-error>Enter a valid email address.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Country</mat-label>
+            <input matInput formControlName="country">
+            @if (employeeForm.controls.country.hasError('required') && employeeForm.controls.country.touched) {
+              <mat-error>Country is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Department</mat-label>
+            <input matInput formControlName="department">
+            @if (employeeForm.controls.department.hasError('required') && employeeForm.controls.department.touched) {
+              <mat-error>Department is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Job title</mat-label>
+            <input matInput formControlName="jobTitle">
+            @if (employeeForm.controls.jobTitle.hasError('required') && employeeForm.controls.jobTitle.touched) {
+              <mat-error>Job title is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Hire date</mat-label>
+            <input matInput type="date" formControlName="hireDate">
+            @if (employeeForm.controls.hireDate.hasError('required') && employeeForm.controls.hireDate.touched) {
+              <mat-error>Hire date is required.</mat-error>
+            }
+          </mat-form-field>
+          <mat-checkbox formControlName="active">Active employee</mat-checkbox>
+        </div>
+
+        <div class="form-actions">
+          <button mat-button type="button" (click)="closeForm()" [disabled]="isSaving">Cancel</button>
+          <button mat-flat-button color="primary" type="submit" [disabled]="isSaving">
+            {{ isSaving ? 'Saving…' : (editingEmployeeId === null ? 'Create employee' : 'Save changes') }}
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  }
+
+  @if (selectedEmployee; as employee) {
+    <mat-card class="employee-detail">
+      <div class="panel-heading">
+        <div>
+          <h2>{{ fullName(employee) }}</h2>
+          <p>Employee details</p>
+        </div>
+        <div class="detail-actions">
+          <button mat-button type="button" (click)="editEmployee(employee)">Edit</button>
+          <button mat-button type="button" (click)="selectedEmployee = null">Close</button>
+        </div>
+      </div>
+      <dl class="detail-grid">
+        <div><dt>Employee code</dt><dd>{{ employee.employeeCode }}</dd></div>
+        <div><dt>Email</dt><dd>{{ employee.email }}</dd></div>
+        <div><dt>Country</dt><dd>{{ employee.country }}</dd></div>
+        <div><dt>Department</dt><dd>{{ employee.department }}</dd></div>
+        <div><dt>Job title</dt><dd>{{ employee.jobTitle }}</dd></div>
+        <div><dt>Hire date</dt><dd>{{ employee.hireDate | date:'mediumDate' }}</dd></div>
+        <div><dt>Status</dt><dd>{{ employee.active ? 'Active' : 'Inactive' }}</dd></div>
+        @if (employee.salary; as salary) {
+          <div><dt>Base salary</dt><dd>{{ salary.baseSalary | number:'1.2-2' }} {{ salary.currency }}</dd></div>
+          <div><dt>Salary effective date</dt><dd>{{ salary.effectiveDate | date:'mediumDate' }}</dd></div>
+        }
+      </dl>
+    </mat-card>
+  }
+
+  <mat-card class="employee-list-panel">
+    @if (isLoading) {
+      <mat-progress-bar mode="indeterminate" aria-label="Loading employees"></mat-progress-bar>
+    }
+    <div class="panel-heading list-heading">
+      <div>
+        <h2>Employee directory</h2>
+        <p>{{ totalElements | number }} employees</p>
+      </div>
+      <button mat-stroked-button type="button" (click)="loadEmployees()" [disabled]="isLoading">
+        Refresh
+      </button>
+    </div>
+
+    @if (!isLoading && employees.length === 0 && !errorMessage) {
+      <div class="empty-state">No employees found. Add an employee to get started.</div>
+    } @else {
+      <div class="table-scroll">
+        <table mat-table [dataSource]="employees" [trackBy]="trackEmployee" aria-label="Employees">
+          <ng-container matColumnDef="employeeCode">
+            <th mat-header-cell *matHeaderCellDef>Code</th>
+            <td mat-cell *matCellDef="let employee">{{ employee.employeeCode }}</td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let employee">{{ fullName(employee) }}</td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let employee">{{ employee.email }}</td>
+          </ng-container>
+          <ng-container matColumnDef="country">
+            <th mat-header-cell *matHeaderCellDef>Country</th>
+            <td mat-cell *matCellDef="let employee">{{ employee.country }}</td>
+          </ng-container>
+          <ng-container matColumnDef="department">
+            <th mat-header-cell *matHeaderCellDef>Department</th>
+            <td mat-cell *matCellDef="let employee">{{ employee.department }}</td>
+          </ng-container>
+          <ng-container matColumnDef="jobTitle">
+            <th mat-header-cell *matHeaderCellDef>Job title</th>
+            <td mat-cell *matCellDef="let employee">{{ employee.jobTitle }}</td>
+          </ng-container>
+          <ng-container matColumnDef="active">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let employee">
+              <span class="status-pill" [class.inactive]="!employee.active">
+                {{ employee.active ? 'Active' : 'Inactive' }}
+              </span>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let employee">
+              <button mat-button type="button" (click)="viewEmployee(employee)">View</button>
+              <button mat-button type="button" (click)="editEmployee(employee)">Edit</button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let employee; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        [length]="totalElements"
+        [pageIndex]="pageIndex"
+        [pageSize]="pageSize"
+        [pageSizeOptions]="[10, 25, 50]"
+        (page)="changePage($event)"
+        aria-label="Employee directory pages"
+      />
+    }
+  </mat-card>
+</section>

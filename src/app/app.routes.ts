@@ -21,6 +21,11 @@ export const routes: Routes = [
         path: 'department',
         loadComponent: () => import('./feature/dashboard/department-analytics.component')
           .then(module => module.DepartmentAnalyticsComponent)
+      },
+      {
+        path: 'employees',
+        loadComponent: () => import('./feature/employees/employees.component')
+          .then(module => module.EmployeesComponent)
       }
     ]
   },
