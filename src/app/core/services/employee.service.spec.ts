@@ -1,7 +1,7 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { authInterceptor } from '../../core/interceptors/auth.interceptor';
+import { authInterceptor } from '../interceptors/auth.interceptor';
 import { EmployeePayload, EmployeeService } from './employee.service';
 
 describe('EmployeeService', () => {

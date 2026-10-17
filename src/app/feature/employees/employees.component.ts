@@ -11,7 +11,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
-import { Employee, EmployeePage, EmployeePayload, EmployeeService } from './employee.service';
+import { Employee, EmployeePage, EmployeePayload, EmployeeService } from '../../core/services/employee.service';
 
 @Component({
   selector: 'app-employees',

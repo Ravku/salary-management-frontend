@@ -1,12 +1,13 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { environment } from '../../../environments/environment';
 
-const analyticsApiBaseUrl = 'http://localhost:8080/api/analytics/';
-const employeesApiUrl = 'http://localhost:8080/api/employees';
+const analyticsApiUrl = `${environment.apiBaseUrl}/analytics/`;
+const employeesApiUrl = `${environment.apiBaseUrl}/employees`;
 
 export const authInterceptor: HttpInterceptorFn = (request, next) => {
-  const isProtectedApiRequest = request.url.startsWith(analyticsApiBaseUrl)
+  const isProtectedApiRequest = request.url.startsWith(analyticsApiUrl)
     || request.url === employeesApiUrl
     || request.url.startsWith(`${employeesApiUrl}?`)
     || request.url.startsWith(`${employeesApiUrl}/`);

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 export interface SalaryStatistic {
   currency: string;
@@ -31,7 +32,7 @@ export interface DepartmentAnalytics {
 
 @Injectable({ providedIn: 'root' })
 export class AnalyticsService {
-  private readonly apiBaseUrl = 'http://localhost:8080/api/analytics';
+  private readonly apiBaseUrl = `${environment.apiBaseUrl}/analytics`;
 
   constructor(private readonly http: HttpClient) {}
 
