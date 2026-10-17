@@ -17,6 +17,11 @@
 .employees-page .detail-grid dt{margin-bottom:5px;color:#7386a2;font-size:11px}
 .employees-page .detail-grid dd{margin:0;font-size:13px;font-weight:600;overflow-wrap:anywhere}
 .employees-page .list-heading{margin-bottom:10px}
+.employees-page .list-actions{display:flex;align-items:center;gap:8px}
+.employees-page .employee-filters{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr)) auto;align-items:center;gap:0 12px;margin:12px 0}
+.employees-page .employee-filters mat-form-field{width:100%}
+.employees-page .employee-filters button{margin-bottom:20px;white-space:nowrap}
+.employees-page .filter-scope{grid-column:1/-1;margin:0 0 8px;color:#7386a2;font-size:11px}
 .employees-page .table-scroll{overflow-x:auto}
 .employees-page table{width:100%;background:transparent}
 .employees-page .mat-mdc-header-cell{padding:0 12px;border-bottom-color:#dce4ed;color:#7185a2;font-size:10px;font-weight:750;text-transform:uppercase;white-space:nowrap}
@@ -28,5 +33,5 @@
 .employees-page mat-paginator{border-top:1px solid #e8edf3;background:transparent}
 .employees-page .empty-state{padding:35px 15px;color:#7386a2;text-align:center;font-size:13px}
 .employees-page mat-progress-bar{margin:-18px -18px 18px;width:calc(100% + 36px)}
-@media(max-width:1050px){.employees-page .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.employees-page .detail-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:620px){.employees-header{align-items:flex-start}.employees-header h1{font-size:25px}.employees-header p{font-size:11px}.employees-header button{white-space:nowrap}.employees-page .employee-form-panel,.employees-page .employee-detail,.employees-page .employee-list-panel{padding:14px}.employees-page .form-grid{grid-template-columns:1fr;gap:0}.employees-page .form-grid mat-checkbox{margin-bottom:16px}.employees-page .detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.employees-page .panel-heading h2{font-size:15px}.employees-page .mat-mdc-header-cell,.employees-page .mat-mdc-cell{padding-right:9px;padding-left:9px}.employees-page mat-progress-bar{margin:-14px -14px 14px;width:calc(100% + 28px)}}
+@media(max-width:1050px){.employees-page .form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.employees-page .detail-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.employees-page .employee-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.employees-header{align-items:flex-start}.employees-header h1{font-size:25px}.employees-header p{font-size:11px}.employees-header button{white-space:nowrap}.employees-page .employee-form-panel,.employees-page .employee-detail,.employees-page .employee-list-panel{padding:14px}.employees-page .form-grid{grid-template-columns:1fr;gap:0}.employees-page .form-grid mat-checkbox{margin-bottom:16px}.employees-page .detail-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.employees-page .employee-filters{grid-template-columns:1fr}.employees-page .employee-filters button{justify-self:start;margin-bottom:12px}.employees-page .filter-scope{grid-column:auto}.employees-page .panel-heading h2{font-size:15px}.employees-page .mat-mdc-header-cell,.employees-page .mat-mdc-cell{padding-right:9px;padding-left:9px}.employees-page mat-progress-bar{margin:-14px -14px 14px;width:calc(100% + 28px)}}

@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { finalize } from 'rxjs';
 import { Employee, EmployeePage, EmployeePayload, EmployeeService } from '../../core/services/employee.service';
 
+type EmployeeStatusFilter = 'all' | 'active' | 'inactive';
+
 @Component({
   selector: 'app-employees',
   standalone: true,
@@ -39,6 +41,7 @@ export class EmployeesComponent implements OnInit {
     'country',
     'department',
     'jobTitle',
+    'salary',
     'active',
     'actions'
   ];
@@ -55,6 +58,13 @@ export class EmployeesComponent implements OnInit {
     active: [true]
   });
 
+  readonly filterForm = this.formBuilder.nonNullable.group({
+    employeeCode: '',
+    country: '',
+    department: '',
+    status: 'all' as EmployeeStatusFilter
+  });
+
   employees: Employee[] = [];
   totalElements = 0;
   pageIndex = 0;
@@ -63,10 +73,42 @@ export class EmployeesComponent implements OnInit {
   isSaving = false;
   errorMessage = '';
   successMessage = '';
+  exportErrorMessage = '';
   formErrorMessage = '';
   formVisible = false;
   editingEmployeeId: number | null = null;
   selectedEmployee: Employee | null = null;
+
+  get filteredEmployees(): Employee[] {
+    const filters = this.filterForm.getRawValue();
+    const employeeCode = filters.employeeCode.trim().toLowerCase();
+    const country = filters.country.trim().toLowerCase();
+    const department = filters.department.trim().toLowerCase();
+
+    return this.employees.filter(employee =>
+      employee.employeeCode.toLowerCase().includes(employeeCode)
+      && employee.country.toLowerCase().includes(country)
+      && employee.department.toLowerCase().includes(department)
+      && (
+        filters.status === 'all'
+        || (filters.status === 'active' ? employee.active : !employee.active)
+      )
+    );
+  }
+
+  get employeeExportRows(): Array<Record<string, string | number>> {
+    return this.filteredEmployees.map(employee => ({
+      'Employee Code': employee.employeeCode,
+      Name: this.fullName(employee),
+      Email: employee.email,
+      Country: employee.country,
+      Department: employee.department,
+      'Job Title': employee.jobTitle,
+      'Base Salary': employee.salary?.baseSalary ?? '',
+      Currency: employee.salary?.currency ?? '',
+      Status: employee.active ? 'Active' : 'Inactive'
+    }));
+  }
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -98,6 +140,42 @@ export class EmployeesComponent implements OnInit {
 
   changePage(event: PageEvent): void {
     this.loadEmployees(event.pageIndex, event.pageSize);
+  }
+
+  async exportEmployees(): Promise<void> {
+    this.exportErrorMessage = '';
+
+    try {
+      const ExcelJS = await import('exceljs');
+      const workbook = new ExcelJS.Workbook();
+      const worksheet = workbook.addWorksheet('Employees');
+      worksheet.columns = [
+        { header: 'Employee Code', key: 'Employee Code', width: 18 },
+        { header: 'Name', key: 'Name', width: 24 },
+        { header: 'Email', key: 'Email', width: 30 },
+        { header: 'Country', key: 'Country', width: 20 },
+        { header: 'Department', key: 'Department', width: 22 },
+        { header: 'Job Title', key: 'Job Title', width: 22 },
+        { header: 'Base Salary', key: 'Base Salary', width: 16 },
+        { header: 'Currency', key: 'Currency', width: 12 },
+        { header: 'Status', key: 'Status', width: 12 }
+      ];
+      worksheet.addRows(this.employeeExportRows);
+      worksheet.getRow(1).font = { bold: true };
+
+      const buffer = await workbook.xlsx.writeBuffer();
+      const file = new Blob([buffer], {
+        type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      });
+      const downloadUrl = URL.createObjectURL(file);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.download = 'employee-details.xlsx';
+      link.click();
+      URL.revokeObjectURL(downloadUrl);
+    } catch {
+      this.exportErrorMessage = 'Employee data could not be exported. Please try again.';
+    }
   }
 
   showCreateForm(): void {
